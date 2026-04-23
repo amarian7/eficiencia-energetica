@@ -1,0 +1,19 @@
+services:
+  db-esg:
+    image: postgres:15-alpine
+    environment:
+      POSTGRES_DB: cidades_esg
+      POSTGRES_USER: admin
+      POSTGRES_PASSWORD: 123
+    ports:
+      - "5432:5432"
+  app-esg:
+    build: .
+    ports:
+      - "8080:8080"
+    depends_on:
+      - db-esg
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://db-esg:5432/cidades_esg
+      SPRING_DATASOURCE_USERNAME: admin
+      SPRING_DATASOURCE_PASSWORD: 123
