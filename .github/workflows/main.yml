@@ -1,25 +1,25 @@
-name: CI/CD Pipeline - Eficiencia Energetica
+name: CI-CD Pipeline
 
 on:
   push:
-    branches: [ "main", "master" ]
+    branches: [ "main" ]
   pull_request:
-    branches: [ "main", "master" ]
+    branches: [ "main" ]
 
 jobs:
   build:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout do codigo
+      - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: Configurar JDK 21
+      - name: Setup Java JDK
         uses: actions/setup-java@v4
         with:
-          java-version: "21"
-          distribution: "temurin"
+          java-version: '21'
+          distribution: 'temurin'
           cache: maven
 
-      - name: Build e Testes com Maven
+      - name: Build with Maven
         run: mvn clean package -DskipTests
